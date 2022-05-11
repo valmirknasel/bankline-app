@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MovimentacaoService } from 'src/app/services/movimentacao.service';
+import {Movimentacao} from "../../model/Movimentacao";
 
 @Component({
   selector: 'app-movimentacao-list',
@@ -8,7 +9,7 @@ import { MovimentacaoService } from 'src/app/services/movimentacao.service';
 })
 export class MovimentacaoListComponent implements OnInit {
 
-  movimentacoes:any;
+  movimentacoes: Movimentacao[] = [];
 
   constructor(private movimentacaoService: MovimentacaoService) { }
 

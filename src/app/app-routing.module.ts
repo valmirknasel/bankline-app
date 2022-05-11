@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MovimentacaoNewComponent} from './compoents/movimentacao-new/movimentacao-new.component';
+import { MovimentacaoNewComponent} from './components/movimentacao-new/movimentacao-new.component';
 import { MovimentacaoListComponent } from './components/movimentacao-list/movimentacao-list.component';
 
 const routes: Routes = [

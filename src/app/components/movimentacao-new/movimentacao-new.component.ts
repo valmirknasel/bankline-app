@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CorrentistaService } from 'src/app/services/correntista.service';
 import { MovimentacaoService } from 'src/app/services/movimentacao.service';
+import {Correntista} from "../../model/Correntista";
 
 @Component({
   selector: 'app-movimentacao-new',
@@ -8,7 +9,7 @@ import { MovimentacaoService } from 'src/app/services/movimentacao.service';
   styleUrls: ['./movimentacao-new.component.css']
 })
 export class MovimentacaoNewComponent implements OnInit {
-  correntistas: any;
+  correntistas: Correntista[] = [];
   correntistaSelecionado:any;
 
   constructor(private movimentacaoService: MovimentacaoService, private correntistaService: CorrentistaService) { }

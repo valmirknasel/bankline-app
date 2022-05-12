@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {TipoMovimentacao} from "./model/TipoMovimentacao";
 
 @Component({
   selector: 'app-root',

@@ -20,31 +20,32 @@ export class MovimentacaoListComponent implements OnInit {
 
   ngOnInit(): void {
     this.recuperaDadosDaApi();
+    this.recuperaDadosDaApi2()
   }
 
-  recuperaDadosDaApi(): void {
-    this.contadorTeste++;
-    let ms = this.movimentacaoService.list();
 
+  recuperaDadosDaApi(): void {
+
+    let ms = this.movimentacaoService.list();
     ms.subscribe(listaDeMovimentacoes => {
         this.movimentacoes = listaDeMovimentacoes;
-        console.log('dados da api de movimentacoes: ' + listaDeMovimentacoes);
       },
       error => {
         console.log(error);
       });
-    this.vinculaMovimentacaoAoCorrentista();
-    console.log('Contador de chamadas: ' + this.contadorTeste);
   }
 
-  private vinculaMovimentacaoAoCorrentista() {
-    console.log('entrou no metodo vincula movimentacao');
-    this.movimentacoes.forEach(mov => console.log(mov.descricao));
-    let v = this.movimentacoes.map(function (mov: Movimentacao): string {
-      //TODO descobrir pq está vazio o mapeamento apesar da listar estar preenchida...
-      return mov.descricao
-    })
-    console.log('movimentacao: ' + v);
+  recuperaDadosDaApi2(): Movimentacao[] {
+    let movimentacoes: Movimentacao[] = [];
+    let ms = this.movimentacaoService.list();
+    ms.subscribe(listaDeMovimentacoes => {
+        movimentacoes = listaDeMovimentacoes;
+      },
+      error => {
+        console.log(error);
+      });
+    console.log('listaMovimentacoes: ' + movimentacoes);
+    console.log('tamanho listaMovimentacoes: ' + movimentacoes.length);
+    return movimentacoes;
   }
-
 }

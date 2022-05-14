@@ -1,30 +1,31 @@
 <div class="container">
-    <a class="btn btn-outline-primary btn-sm" routerLink="/movimentacoes-new">Nova Movimentação</a>
-
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Data Hora</th>
-                <th scope="col">Descrição</th>
-                <th scope="col">Valor</th>
-                <th scope="col">Tipo de Movimentação</th>
-                <th scope="col">Correntista</th>
-                <th scope="col" >Nome do Correntista </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let movimentacao of movimentacoes; index as i">
-                <th scope="row">{{i + 1}}</th>
-                <td>{{ movimentacao.dataHora | date: 'dd/MM/yyyy HH:mm:ss'}}</td>
-                <td>{{ movimentacao.descricao }}</td>
-                <td [ngStyle]="{'color':movimentacao.tipo === 'RECEITA' ? 'blue': 'red', 'text-align':'left'}">{{ movimentacao.valor | currency: 'BRL' }}
-                </td>
-                <td>{{ movimentacao.tipo }}</td>
-                <td>{{ movimentacao.idCorrentista }}</td>
-              <!-- TODO verificar uma forma melhor de fazer essa validacao na coluna e no rotulo da coluna "Nome do Correntista"-->
-                <td *ngIf="movimentacao.correntista !== undefined">{{ movimentacao.correntista.nome }}</td>
-            </tr>
-        </tbody>
-    </table>
+	<a class="btn btn-outline-primary btn-sm" routerLink="/movimentacoes-new">Nova Movimentação</a>
+	
+	<table class="table table-striped">
+		<caption>Lista de Movimentações</caption>
+		<thead>
+		<tr>
+			<th scope="col">#</th>
+			<th scope="col">Data Hora</th>
+			<th scope="col">Descrição</th>
+			<th scope="col">Valor</th>
+			<th scope="col">Tipo de Movimentação</th>
+			<th scope="col">Correntista</th>
+			<th scope="col">Nome do Correntista</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr *ngFor="let movimentacao of movimentacoes; index as i">
+			<th scope="row">{{i + 1}}</th>
+			<td>{{ movimentacao.dataHora | date: 'dd/MM/yyyy HH:mm:ss'}}</td>
+			<td>{{ movimentacao.descricao }}</td>
+			<td [ngStyle]="{'color':movimentacao.tipo === 'RECEITA' ? 'blue': 'red', 'text-align':'left'}">{{ movimentacao.valor | currency: 'BRL' }}
+			</td>
+			<td>{{ movimentacao.tipo }}</td>
+			<td>{{ movimentacao.idCorrentista }}</td>
+			<!-- TODO verificar uma forma melhor de fazer essa validacao na coluna e no rotulo da coluna "Nome do Correntista"-->
+			<td *ngIf="movimentacao.correntista !== undefined">{{ movimentacao.correntista.nome }}</td>
+		</tr>
+		</tbody>
+	</table>
 </div>

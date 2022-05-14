@@ -4,11 +4,11 @@ import {Correntista} from "./Correntista";
 export class Movimentacao {
 
 
-  get correntista(): Correntista {
+  get correntista(): Correntista | undefined {
     return this._correntista;
   }
 
-  set correntista(value: Correntista) {
+  set correntista(value: Correntista | undefined) {
     this._correntista = value;
   }
 
@@ -19,7 +19,7 @@ export class Movimentacao {
     private _tipo: TipoMovimentacao,
     private _valor: number,
     private _idCorrentista: number,
-    private _correntista: Correntista) {
+    private _correntista?: Correntista) {
   }
 
   get id(): number {

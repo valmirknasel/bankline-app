@@ -1,16 +1,12 @@
 import {Conta} from "./Conta";
 
 export class Correntista {
-  private _id: number;
-  private _cpf: string;
-  private _nome: string;
-  private _conta: Conta;
 
-  constructor(id: number, cpf: string, nome: string, conta: Conta) {
-    this._id = id;
-    this._cpf = cpf;
-    this._nome = nome;
-    this._conta = conta;
+  constructor(
+    private _id: number,
+    private _cpf: string,
+    private _nome: string,
+    private _conta: Conta) {
   }
 
   get id(): number {

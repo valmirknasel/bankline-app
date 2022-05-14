@@ -1,12 +1,9 @@
 export class Conta {
-  private _numero: string;
-  private _saldo: number;
 
-  constructor(numero: string, saldo: number) {
-    this._numero = numero;
-    this._saldo = saldo;
+  constructor(
+    private _numero: string,
+    private _saldo: number) {
   }
-
 
   get numero(): string {
     return this._numero;

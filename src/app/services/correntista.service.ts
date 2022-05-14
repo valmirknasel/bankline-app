@@ -9,18 +9,19 @@ import {Correntista} from "../model/Correntista";
 const baseUrl = 'http://localhost:8080';
 
 @Injectable({
-  providedIn: 'root'
+		providedIn: 'root'
 })
 export class CorrentistaService {
-  constructor(private http: HttpClient) {
-  }
+		constructor(private http: HttpClient) {
+		}
 
-  list(): Observable<Correntista[]> {
-    return this.http.get<Correntista[]>(`${baseUrl}/correntistas`);
-  }
+		list(): Observable<Correntista[]> {
+				return this.http.get<Correntista[]>(`${baseUrl}/correntistas`);
+		}
 
-  getCorrentistaById(idCorrentista: number): Observable<Correntista> {
-    let id = idCorrentista;
-    return this.http.get<Correntista>(`${baseUrl}/correntistas/${id}`);
-  }
+		getCorrentistaById(idCorrentista: number): Observable<Correntista> {
+			//TODO descobri por qual motivo é necessário declarar a variavel localmente se ela já vem no metodo como argumento
+			let id = idCorrentista;
+				return this.http.get<Correntista>(`${baseUrl}/correntistas/${id}`);
+		}
 }

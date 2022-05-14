@@ -10,7 +10,7 @@
                 <th scope="col">Valor</th>
                 <th scope="col">Tipo de Movimentação</th>
                 <th scope="col">Correntista</th>
-                <th scope="col">Nome do Correntista </th>
+                <th scope="col" >Nome do Correntista </th>
             </tr>
         </thead>
         <tbody>
@@ -22,7 +22,8 @@
                 </td>
                 <td>{{ movimentacao.tipo }}</td>
                 <td>{{ movimentacao.idCorrentista }}</td>
-                <td>{{ movimentacao.correntista.nome }}</td>
+              <!-- TODO verificar uma forma melhor de fazer essa validacao na coluna e no rotulo da coluna "Nome do Correntista"-->
+                <td *ngIf="movimentacao.correntista !== undefined">{{ movimentacao.correntista.nome }}</td>
             </tr>
         </tbody>
     </table>

@@ -5,43 +5,36 @@
 		<p class="lead-1">Inclusão de uma nova movimentação</p>
 		<hr class="my-2">
 		
-		<form class="row g-2">
-			<div class="col-md-3">
-				<label for="iData" class="form-label">Data</label>
-				<input type="date" class="form-control" id="iData">
-			</div>
-		</form>
-		
 		<div class="col-md-9">
 			<label for="iCorrentista" class="form-label">Correntista</label>
 			<!-- define o correntista selecionado e atribui ao correntistaSelecionado no component.ts-->
-			<select id="iCorrentista" class="form-select" [(ngModel)]="correntistaSelecionado">
-				<option selected [ngValue]="null">Selecione uma opção</option>
+			<select id="iCorrentista" class="form-select" (change)="selecionaCorrentista()" [(ngModel)]="correntistaSelecionado">
 				<option *ngFor="let c of correntistas" [ngValue]="c">{{ c.nome }}</option>
+			</select>
+		</div>
+		
+		<div class="col-md-3">
+			<label for="iTipo" class="form-label">Tipo Movimentação</label>
+			<select id="iTipo" [(ngModel)]="movimentacao.tipo" (change)="selecionaTipoMovimento()" class="form-select">
+				<!-- forma de utilizacao de enums para preencher a lista -->
+				<option *ngFor="let tMov of tipoMovimentacao | keyvalue">{{tMov.value}}</option>
 			</select>
 		</div>
 		
 		<div class="col-12">
 			<label for="iDescricao" class="form-label">Descrição</label>
-			<input type="text" class="form-control" id="iDescricao" placeholder="Informe uma descrição">
-		</div>
+			<input type="text" [(ngModel)]="movimentacao.descricao" (ngModelChange)="descricaoModificada()" class="form-control" id="iDescricao" placeholder="Informe uma descrição">
 		
-		<div class="col-md-3">
-			<label for="iTipo" class="form-label">Tipo Movimentação</label>
-			<select id="iTipo" class="form-select">
-				<option selected [ngValue]="null">Selecione uma opção</option>
-				<option *ngFor="let tm of tipoMovimentacao | keyvalue" [ngValue]="tipoMovimentacao">{{tm.value}}</option>
-			</select>
 		</div>
 		
 		<div class="col-md-2">
 			<label for="iValor" class="form-label"> R$ Valor</label>
 			<!-- currencyMask formata o campo valor para o formato moeda -->
-			<input type="text" currencyMask [options]="{prefix: 'R$ ', thousands: '.', decimal:','}" class="form-control" id="iValor">
+			<input type="text" [(ngModel)]="movimentacao.valor" (ngModelChange)="valorModificado()" currencyMask [options]="{prefix: 'R$ ', thousands: '.', decimal:','}" class="form-control" id="iValor">
 		</div>
 		
 		<div class="d-grid gap-2 d-md-flex ">
-			<button class="btn btn-outline-primary me-md-2" type="button">Confirmar</button>
+			<button class="btn btn-outline-primary me-md-2" (click)="salvarMovimentacao()" type="button">Confirmar</button>
 			<a routerLink="/movimentacoes" class="btn btn-outline-secondary">Cancelar</a>
 		</div>
 	</div>

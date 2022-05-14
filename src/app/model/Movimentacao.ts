@@ -3,13 +3,6 @@ import {Correntista} from "./Correntista";
 
 export class Movimentacao {
 
-  private _id: number;
-  private _dataHora: string;
-  private _descricao: string;
-  private _tipo: TipoMovimentacao;
-  private _valor: number;
-  private _idCorrentista: number;
-  private _correntista: Correntista;
 
   get correntista(): Correntista {
     return this._correntista;
@@ -19,14 +12,14 @@ export class Movimentacao {
     this._correntista = value;
   }
 
-  constructor({_id, _dataHora, _descricao, _tipo, _valor, _idCorrentista, _correntista}: Movimentacao) {
-    this._id = _id;
-    this._dataHora = _dataHora;
-    this._descricao = _descricao;
-    this._tipo = _tipo;
-    this._valor = _valor;
-    this._idCorrentista = _idCorrentista;
-    this._correntista = _correntista;
+  constructor(
+    private _id: number,
+    private _dataHora: string,
+    private _descricao: string,
+    private _tipo: TipoMovimentacao,
+    private _valor: number,
+    private _idCorrentista: number,
+    private _correntista: Correntista) {
   }
 
   get id(): number {

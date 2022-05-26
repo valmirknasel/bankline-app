@@ -1,40 +1,39 @@
 import {Component, OnInit} from '@angular/core';
 import {MovimentacaoService} from 'src/app/services/movimentacao.service';
 import {Movimentacao} from "../../model/Movimentacao";
-import {CorrentistaService} from "../../services/correntista.service";
 
 @Component({
-  selector: 'app-movimentacao-list',
-  templateUrl: './movimentacao-list.component.html',
-  styleUrls: ['./movimentacao-list.component.css']
+	selector: 'app-movimentacao-list',
+	templateUrl: './movimentacao-list.component.html',
+	styleUrls: ['./movimentacao-list.component.scss']
 })
 export class MovimentacaoListComponent implements OnInit {
 
-  movimentacoes: Movimentacao[] = [];
+	movimentacoes: Movimentacao[] = [];
+	data!: Date;
 
-  constructor(private movimentacaoService: MovimentacaoService, private correntistaService: CorrentistaService) {
-  }
+	constructor(private movimentacaoService: MovimentacaoService) {
+	}
 
-  ngOnInit(): void {
-    this.recuperaDadosDaApi();
-  }
+	ngOnInit(): void {
+		this.recuperaDadosDaApi();
+		this.inicializaForm();
+	}
 
-  recuperaDadosDaApi(): void {
-    //nao facam isso em producao que vai dar xabu
-    this.movimentacaoService.findAll().subscribe(listaDeMovimentacoes => {
-        listaDeMovimentacoes.forEach(movimentacao => {
-          this.correntistaService.getCorrentistaById(movimentacao.idCorrentista).subscribe(correntista => {
-            if (correntista !== null) {
-              if (movimentacao.idCorrentista === correntista.id) {
-                movimentacao.correntista = correntista;
-              }
-            }
-          })
-        })
-        this.movimentacoes = listaDeMovimentacoes;
-      },
-      error => {
-        console.log(error);
-      })
-  }
+	recuperaDadosDaApi(): void {
+		this.recuperaDataAtualizacaoTabela();
+		this.movimentacaoService.findAll().subscribe(listaDeMovimentacoes => {
+				this.movimentacoes = listaDeMovimentacoes;
+			},
+			error => {
+				console.log(error);
+			})
+	}
+
+	private inicializaForm() {
+	}
+
+	private recuperaDataAtualizacaoTabela(): Date {
+		return this.data = new Date();
+	}
 }

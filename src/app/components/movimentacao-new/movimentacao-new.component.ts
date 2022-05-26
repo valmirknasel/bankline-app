@@ -4,11 +4,12 @@ import {MovimentacaoService} from 'src/app/services/movimentacao.service';
 import {Correntista} from "../../model/Correntista";
 import {TipoMovimentacao} from "../../model/TipoMovimentacao";
 import {MovimentacaoDTO} from "../../model/dto/MovimentacaoDTO";
+import {Router} from "@angular/router";
 
 @Component({
 	selector: 'app-movimentacao-new',
 	templateUrl: './movimentacao-new.component.html',
-	styleUrls: ['./movimentacao-new.component.css']
+	styleUrls: ['./movimentacao-new.component.scss']
 })
 export class MovimentacaoNewComponent implements OnInit {
 
@@ -20,7 +21,7 @@ export class MovimentacaoNewComponent implements OnInit {
 	movimentacao!: MovimentacaoDTO;
 
 
-	constructor(private movimentacaoService: MovimentacaoService, private correntistaService: CorrentistaService) {
+	constructor(private movimentacaoService: MovimentacaoService, private correntistaService: CorrentistaService, private router:Router) {
 	}
 
 	ngOnInit(): void {
@@ -42,28 +43,34 @@ export class MovimentacaoNewComponent implements OnInit {
 	}
 
 	salvarMovimentacao(): void {
-
-		//TODO remover as impressoes no log
-		console.log("salvarMovimentacao-movimentacao");
-		console.log(this.movimentacao);
-
-		if (this.movimentacao !== undefined) {
-			//TODO verificar por qual motivo os dados sao enviados fora de ordem apesar de chegar ate aqui na ordem correta
-			this.movimentacaoService.gravarMovimentacao(this.movimentacao).subscribe(
-				response => {
-					console.log("success");
-					console.log(response);
-				},
-				error => {
-					console.log("error");
-					console.log(error);
-				}
-			);
-		} else {
-			this.inicializaForm();
+		let decision = confirm("Tem certeza que deseja prosseguir?")
+		if (decision) {
 			//TODO remover as impressoes no log
-			console.log("salvarMovimentacao-inicializarForm")
+			console.log("salvarMovimentacao-movimentacao");
+			console.log(this.movimentacao);
+
+			if (this.movimentacao !== undefined) {
+				this.movimentacaoService.gravarMovimentacao(this.movimentacao).subscribe(
+					() => {
+						//TODO melhorar essa respsota...
+						confirm("Nova movimentação gravada com sucesso!")
+						this.router.navigate(['/movimentacoes']);
+					},
+					error => {
+						console.log("error");
+						console.log(error);
+					}
+				);
+			} else {
+				this.inicializaForm();
+				//TODO remover as impressoes no log
+				console.log("salvarMovimentacao-inicializarForm")
+			}
+		} else {
+			return;
 		}
+		console.log("Decisao")
+		console.log(decision)
 	}
 
 	private inicializaForm() {

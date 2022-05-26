@@ -10,7 +10,10 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule} from '@angular/common/http';
 import { registerLocaleData } from '@angular/common';
 import  localePt from '@angular/common/locales/pt';
-import {CurrencyMaskModule} from "ng2-currency-mask";
+import { CurrencyMaskModule } from "ng2-currency-mask";
+import { MovimentacaoListItemComponent } from './components/movimentacao-list-item/movimentacao-list-item.component';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { MovimentacaoDeleteComponent } from './components/movimentacao-delete/movimentacao-delete.component';
 
 registerLocaleData(localePt);
 
@@ -18,16 +21,19 @@ registerLocaleData(localePt);
   declarations: [
     AppComponent,
     MovimentacaoListComponent,
-    MovimentacaoNewComponent
+    MovimentacaoNewComponent,
+    MovimentacaoListItemComponent,
+    MovimentacaoDeleteComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    NgbModule,
-    FormsModule,
-    HttpClientModule,
-    CurrencyMaskModule
-  ],
+	imports: [
+		BrowserModule,
+		BrowserAnimationsModule,
+		AppRoutingModule,
+		NgbModule,
+		FormsModule,
+		HttpClientModule,
+		CurrencyMaskModule,
+	],
   providers: [{provide: LOCALE_ID, useValue: 'pt-BR'}],
   bootstrap: [AppComponent]
 })

@@ -10,20 +10,24 @@ import {MovimentacaoDTO} from "../model/dto/MovimentacaoDTO";
 export class MovimentacaoService {
 
 	//caminho base da api que vai ser acessada
-	private baseUrl = "http://localhost:8080"
-	private listaDeMovimentacoesUrl = `${this.baseUrl}/movimentacoes`
+	private readonly baseUrl = "http://localhost:8080"
+	private readonly API_MOVIMENTACOES = `${this.baseUrl}/movimentacoes`
 
 	constructor(private http: HttpClient) {
 	}
 
 	findAll(): Observable<Movimentacao[]> {
-		return this.http.get<Movimentacao[]>(this.listaDeMovimentacoesUrl);
+		return this.http.get<Movimentacao[]>(this.API_MOVIMENTACOES);
 	}
 
-	gravarMovimentacao(movimentacao: MovimentacaoDTO) {
-			//TODO remover as impressoes no log
-			console.log("gravarMovimentacao")
-			console.log(movimentacao)
-			return this.http.post(`${this.baseUrl}/movimentacoes`, movimentacao);
+	gravarMovimentacao(movimentacao: MovimentacaoDTO): Observable<MovimentacaoDTO> {
+		//TODO remover as impressoes no log
+		console.log("gravarMovimentacao")
+		console.log(movimentacao)
+
+		return this.http.post<MovimentacaoDTO>(
+			this.API_MOVIMENTACOES, movimentacao,
+			{headers: {'Content-Type': "application/json"}}
+		);
 	}
 }

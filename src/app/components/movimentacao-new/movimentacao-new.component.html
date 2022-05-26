@@ -1,41 +1,37 @@
-<div class="container">
-	<div class="jumbotron">
+<div class="d-md-grid">
+	<div class="container align-content-center">
+		<hr class="my-2 col-3">
 		
-		<h1 class="display-6">Movimentação</h1>
-		<p class="lead-1">Inclusão de uma nova movimentação</p>
-		<hr class="my-2">
-		
-		<div class="col-md-9">
+		<div class="col-3">
 			<label for="iCorrentista" class="form-label">Correntista</label>
 			<!-- define o correntista selecionado e atribui ao correntistaSelecionado no component.ts-->
 			<select id="iCorrentista" class="form-select" (change)="selecionaCorrentista()" [(ngModel)]="correntistaSelecionado">
-				<option *ngFor="let c of correntistas" [ngValue]="c">{{ c.nome }}</option>
+				<option [ngValue]="c" *ngFor="let c of correntistas">{{ c.nome }}</option>
 			</select>
 		</div>
 		
-		<div class="col-md-3">
+		<div class="col-3">
 			<label for="iTipo" class="form-label">Tipo Movimentação</label>
-			<select id="iTipo" [(ngModel)]="movimentacao.tipo" (change)="selecionaTipoMovimento()" class="form-select">
+			<select id="iTipo" [(ngModel)]="movimentacao.tipoMovimentacao" (change)="selecionaTipoMovimento()" class="form-select">
 				<!-- forma de utilizacao de enums para preencher a lista -->
 				<option *ngFor="let tMov of tipoMovimentacao | keyvalue">{{tMov.value}}</option>
 			</select>
 		</div>
 		
-		<div class="col-12">
+		<div class="col-3">
 			<label for="iDescricao" class="form-label">Descrição</label>
 			<input type="text" [(ngModel)]="movimentacao.descricao" (ngModelChange)="descricaoModificada()" class="form-control" id="iDescricao" placeholder="Informe uma descrição">
-		
 		</div>
 		
-		<div class="col-md-2">
-			<label for="iValor" class="form-label"> R$ Valor</label>
+		<div class="col-3">
+			<label for="iValor" class="form-label">R$ Valor</label>
 			<!-- currencyMask formata o campo valor para o formato moeda -->
-			<input type="text" [(ngModel)]="movimentacao.valor" (ngModelChange)="valorModificado()" currencyMask [options]="{prefix: 'R$ ', thousands: '.', decimal:','}" class="form-control" id="iValor">
+			<input type="text" id="iValor" class="form-control" [(ngModel)]="movimentacao.valorMovimentacao" (ngModelChange)="valorModificado()" currencyMask [options]="{prefix: 'R$ ', thousands: '.', decimal:','}">
 		</div>
 		
-		<div class="d-grid gap-2 d-md-flex ">
-			<button class="btn btn-outline-primary me-md-2" (click)="salvarMovimentacao()" type="button">Confirmar</button>
-			<a routerLink="/movimentacoes" class="btn btn-outline-secondary">Cancelar</a>
+		<div class="col-3">
+				<button class="layout-buttons btn btn-secondary col-4" routerLink="/movimentacoes">Cancelar</button>
+				<button class="layout-buttons btn btn-primary col-4" (click)="salvarMovimentacao()">Confirmar</button>
 		</div>
 	</div>
 </div>
